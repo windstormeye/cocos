@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "mikado_outline_shadow",
+    "texture": "f3779477-7dbf-4751-902f-985973720152",
+    "atlas": "",
+    "rect": [
+      3,
+      3,
+      497,
+      232
+    ],
+    "offset": [
+      -4.5,
+      9
+    ],
+    "originalSize": [
+      512,
+      256
+    ]
+  }
+}

@@ -1,0 +1,129 @@
+2018-04-28T13:52:14.765Z - normal: Load ~/.CocosCreator/settings.json
+2018-04-28T13:52:14.769Z - normal: checking language setting...
+2018-04-28T13:52:14.769Z - normal: Language: zh
+2018-04-28T13:52:15.423Z - success: protocol editor-framework registered
+2018-04-28T13:52:15.424Z - success: protocol app registered
+2018-04-28T13:52:15.424Z - success: protocol theme registered
+2018-04-28T13:52:15.424Z - success: protocol packages registered
+2018-04-28T13:52:15.424Z - success: protocol unpack registerred
+2018-04-28T13:52:15.424Z - success: protocol disable-commonjs registerred
+2018-04-28T13:52:15.575Z - normal: connected!
+2018-04-28T13:52:15.576Z - normal: Check project /Users/incloud/Downloads/start_project
+2018-04-28T13:52:15.577Z - normal: Initializing Cocos2d
+2018-04-28T13:52:15.802Z - normal: Initializing Asset Database
+2018-04-28T13:52:15.830Z - success: protocol uuid registerred
+2018-04-28T13:52:15.830Z - success: protocol db registerred
+2018-04-28T13:52:15.830Z - success: protocol thumbnail registerred
+2018-04-28T13:52:15.830Z - normal: Loading editor/builtin packages
+2018-04-28T13:52:15.847Z - success: anysdk loaded
+2018-04-28T13:52:15.948Z - success: assets loaded
+2018-04-28T13:52:15.951Z - success: builder loaded
+2018-04-28T13:52:15.953Z - success: cocos-analytics loaded
+2018-04-28T13:52:15.957Z - success: console loaded
+2018-04-28T13:52:15.987Z - success: fb-instant-games loaded
+2018-04-28T13:52:15.992Z - success: hierarchy loaded
+2018-04-28T13:52:15.996Z - success: inspector loaded
+2018-04-28T13:52:15.997Z - success: keystore loaded
+2018-04-28T13:52:16.005Z - success: node-library loaded
+2018-04-28T13:52:16.007Z - success: package-asset loaded
+2018-04-28T13:52:16.008Z - success: preferences loaded
+2018-04-28T13:52:16.011Z - success: project-exporter loaded
+2018-04-28T13:52:16.025Z - success: project-importer loaded
+2018-04-28T13:52:16.028Z - success: project-settings loaded
+2018-04-28T13:52:16.031Z - success: ui-kit loaded
+2018-04-28T13:52:16.035Z - success: ui-grid loaded
+2018-04-28T13:52:16.039Z - success: scene loaded
+2018-04-28T13:52:16.040Z - success: sprite-editor loaded
+2018-04-28T13:52:16.044Z - success: store loaded
+2018-04-28T13:52:16.048Z - success: timeline loaded
+2018-04-28T13:52:16.049Z - normal: Loading builtin packages
+2018-04-28T13:52:16.052Z - success: asset-db-debugger loaded
+2018-04-28T13:52:16.052Z - success: color-picker loaded
+2018-04-28T13:52:16.056Z - success: package-manager loaded
+2018-04-28T13:52:16.060Z - success: sdkbox loaded
+2018-04-28T13:52:16.065Z - success: tester loaded
+2018-04-28T13:52:16.068Z - success: ui-kit-preview-extra loaded
+2018-04-28T13:52:16.072Z - success: ui-kit-preview loaded
+2018-04-28T13:52:16.075Z - success: ui-tree loaded
+2018-04-28T13:52:16.925Z - normal: Initializing project /Users/incloud/Downloads/start_project
+2018-04-28T13:52:16.928Z - normal: Loading packages
+2018-04-28T13:52:16.932Z - normal: Watching packages
+2018-04-28T13:52:16.943Z - normal: Run Application
+2018-04-28T13:52:17.706Z - success: preview server running at http://localhost:7457
+2018-04-28T13:52:22.008Z - normal: 1.9.1
+2018-04-28T13:55:20.484Z - failed: [db-task][sync-changes] Failed to import asset /Users/incloud/Downloads/start_project/assets/script/player.js, message: Compile error: SyntaxError: /Users/incloud/Downloads/start_project/assets/script/player.js: Unexpected token, expected ; (98:61)
+   96 |             this.node.x = this.node.parent.width / 2;
+   97 |             this.xSpeed = 0;
+>  98 |           } else (this.node.x < -this.node.parent.width / 2) {
+      |                                                              ^
+   99 |             this.node.x = -this.node.parent.width / 2;
+  100 |             this.xSpeed = 0;
+  101 |           }
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp.semicolon (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1742:38)
+    at Parser.pp$1.parseExpressionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2236:8)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1911:17)
+    at Parser.pp$1.parseIfStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2060:49)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1846:19)
+    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
+    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
+    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
+2018-04-28T13:55:38.864Z - failed: [db-task][sync-changes] Failed to import asset /Users/incloud/Downloads/start_project/assets/script/player.js, message: Compile error: SyntaxError: /Users/incloud/Downloads/start_project/assets/script/player.js: Unexpected token, expected ; (98:61)
+   96 |             this.node.x = this.node.parent.width / 2;
+   97 |             this.xSpeed = 0;
+>  98 |           } else (this.node.x < -this.node.parent.width / 2) {
+      |                                                              ^
+   99 |             this.node.x = -this.node.parent.width / 2;
+  100 |             this.xSpeed = 0;
+  101 |           }
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp.semicolon (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1742:38)
+    at Parser.pp$1.parseExpressionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2236:8)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1911:17)
+    at Parser.pp$1.parseIfStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2060:49)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1846:19)
+    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
+    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
+    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
+2018-04-28T13:56:08.361Z - failed: [db-task][sync-changes] Failed to import asset /Users/incloud/Downloads/start_project/assets/script/player.js, message: Compile error: SyntaxError: /Users/incloud/Downloads/start_project/assets/script/player.js: Unexpected token, expected ; (98:61)
+   96 |             this.node.x = this.node.parent.width / 2;
+   97 |             this.xSpeed = 0;
+>  98 |           } else (this.node.x < -this.node.parent.width / 2) {
+      |                                                              ^
+   99 |             this.node.x = -this.node.parent.width / 2;
+  100 |             this.xSpeed = 0;
+  101 |           }
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp.semicolon (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1742:38)
+    at Parser.pp$1.parseExpressionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2236:8)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1911:17)
+    at Parser.pp$1.parseIfStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2060:49)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1846:19)
+    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
+    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
+    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
+2018-04-28T14:06:31.294Z - success: VS Code extension installed to /Users/incloud/.vscode/extensions
+2018-04-28T14:07:18.953Z - success: API data generated and copied to /Users/incloud/Downloads/start_project/creator.d.ts
+2018-04-28T14:10:29.698Z - error: Error: ENOENT: no such file or directory, open '/Users/incloud/Downloads/start_project/local/local.json'
+    at Object.fs.openSync (fs.js:584:18)
+    at Object.module.(anonymous function) [as openSync] (ELECTRON_ASAR.js:191:20)
+    at Object.fs.writeFileSync (fs.js:1326:33)
+    at _Profile.save (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/electron-profile/lib/main.js:195:8)
+    at _setCurrentScene (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor/builtin/scene/main.js:1:1099)
+    at Object.set-current-scene (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor/builtin/scene/main.js:1:3316)
+    at emitTwo (events.js:106:13)
+    at EventEmitter.emit (events.js:194:7)
+    at _main2mainOpts (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/main/ipc.js:1:1524)
+    at Object.Ipc.sendToMain (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/main/ipc.js:1:4188)
+    at process.on.t (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor/core/editor-init.js:1:1068)
+    at emitOne (events.js:101:20)
+    at process.emit (events.js:191:7)
+    at process._fatalException (bootstrap_node.js:308:26)
+2018-04-28T14:10:35.445Z - success: Chrome debug setting has been updated to .vscode/launch.json, please install Debugger for Chrome VS Code extension to debug your project.
+2018-04-28T14:14:07.056Z - success: Chrome debug setting has been updated to .vscode/launch.json, please install Debugger for Chrome VS Code extension to debug your project.
+2018-04-28T14:14:17.771Z - success: Chrome debug setting has been updated to .vscode/launch.json, please install Debugger for Chrome VS Code extension to debug your project.
+2018-04-28T14:57:00.075Z - error: Error: ENOENT: no such file or directory, open '/Users/incloud/Downloads/start_project/assets/script/player.js'
+2018-04-28T14:57:01.422Z - error: Error: ENOENT: no such file or directory, open '/Users/incloud/Downloads/start_project/assets/script/game.js'
