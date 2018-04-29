@@ -5,9 +5,9 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": 0,
-      "y": 22,
-      "width": 1440,
+      "x": -268,
+      "y": -1058,
+      "width": 1920,
       "height": 878,
       "layout": {
         "children": [
@@ -20,7 +20,7 @@
                 ],
                 "height": 376,
                 "type": "panel",
-                "width": 232
+                "width": 309
               },
               {
                 "active": 0,
@@ -29,12 +29,12 @@
                 ],
                 "height": 408,
                 "type": "panel",
-                "width": 232
+                "width": 309
               }
             ],
             "height": 787,
             "type": "dock-v",
-            "width": 232
+            "width": 309
           },
           {
             "children": [
@@ -47,7 +47,7 @@
                     ],
                     "height": 409,
                     "type": "panel",
-                    "width": 676
+                    "width": 670.984375
                   },
                   {
                     "active": 0,
@@ -56,12 +56,12 @@
                     ],
                     "height": 409,
                     "type": "panel",
-                    "width": 213
+                    "width": 212
                   }
                 ],
                 "height": 409,
                 "type": "dock-h",
-                "width": 892
+                "width": 886
               },
               {
                 "active": 0,
@@ -71,12 +71,12 @@
                 ],
                 "height": 375,
                 "type": "panel",
-                "width": 892
+                "width": 886
               }
             ],
             "height": 787,
             "type": "dock-v",
-            "width": 892
+            "width": 886
           },
           {
             "active": 0,
@@ -85,7 +85,7 @@
             ],
             "height": 787,
             "type": "panel",
-            "width": 304
+            "width": 713
           }
         ],
         "type": "dock-h"
