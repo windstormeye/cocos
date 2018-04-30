@@ -1,23 +1,28 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
 cc.Class({
     extends: cc.Component,
 
     properties: {
-
+        // 所有boll是否均落下
         bollDown: false,
+        // 是否开始游戏
+        isBegin: false,
+        // 是否在游戏中
+        isActivity: false,
+        // 第一个boll是否触底
+        isFirstBoll: false,
+        // 第一个触底的boll X坐标
+        firstBollPositionX: 0,
+        // 所有小球计数
+        allBolls: 0,
+        // 所有触底小球计数
+        tampBolls: 0,
+        addBolls: 0,
+        level: 0,
 
-        bollSprite: {
+        // 标记第一个触底boll的boll
+        indexBoll: {
             default: null,
-            type: cc.Node
+            type: cc.Sprite,
         },
 
         boxPrefab: {
@@ -25,25 +30,45 @@ cc.Class({
             type: cc.Prefab,
         },
 
+        bollPrefab: {
+            default: null,
+            type: cc.Prefab,
+        },
+
+        lifePrefab: {
+            default: null,
+            type: cc.Prefab,
+        },
+
+        // 地面
         ground: {
             default: null,
             type: cc.Node
         },
-    },
 
-    // LIFE-CYCLE CALLBACKS:
+        // 轨迹条
+        ballLink: {
+            default: null,
+            type: cc.Sprite,
+        },
+
+        levelLabel: {
+            default: null,
+            type: cc.Label,
+        },
+
+        allBollsLabel: {
+            default: null,
+            type: cc.Label,
+        },
+    },
 
     onLoad () {
+        // 开启物理
         cc.director.getPhysicsManager().enabled = true;
-        var manager = cc.director.getCollisionManager();
-        manager.enabled = true;
-        manager.enabledDebugDraw = true;
-        
-        this.ground.getComponent('groundSprite').game = this;
-        this.initBox();
-    },
-
-    initBox: function () {
+        // 开启碰撞
+        cc.director.getCollisionManager().enabled = true;
+    
         for (var i = 0; i < 6; i++) {
             let isBox = Math.ceil(Math.random() * 10) % 2;
             if (isBox == 1) {
@@ -52,57 +77,137 @@ cc.Class({
                 newBox.setPosition(-263 + i * (95 + 10), 450);
             }
         }
-    },
 
-    bollDownGround: function () {
+        this.indexBoll.node.setPosition(cc.v2(this.firstBollPositionX, -350));
+        this.ballLink.node.setPosition(cc.v2(this.firstBollPositionX, -350));   
+        this.ballLink.enabled = false;
+        this.ground.getComponent('groundSprite').game = this;
         this.initBox();
-        this.bollDown = true;
+        this.allBolls = 1;
+
+        this.node.on(cc.Node.EventType.TOUCH_START, function(event){
+            this.touchStart(event);
+        }.bind(this), this);
+
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, function(event){
+            this.touchMove(event);            
+        }.bind(this), this);
+
+        this.node.on(cc.Node.EventType.TOUCH_END, function(event){
+            this.touchEnd(event);
+        }.bind(this), this);
+
     },
 
-    onCollisionEnter: function (other, self) {
-        console.log('2333');
+    initBox: function () {   
+        this.allBollsLabel.node.setPosition(cc.v2(this.firstBollPositionX - 30, -315));
+        this.level ++;
+        this.levelLabel.getComponent(cc.Label).string = "分数：" + this.level;
+        // 下移box
+        if (this.isBegin == true) {
+            var childrenNode = this.node.children;
+            for (var i = 0; i < childrenNode.length; i++) {
+                var node = childrenNode[i];
+                if (node.name == "boxSprite" || node.name == "lifeBox") {
+                    if (node.position.y <= 450) {
+                        node.y -= 100;
+                        if (node.y == -350) {
+                            this.gameOver();
+                        }
+                    }
+                }
+            }
+            // createBox
+            var isShowLifeBox = false;
+            for (var i = 0; i < 6; i++) {
+                let isBox = Math.ceil(Math.random() * 10) % 2;
+                if (isBox == 1) {
+                    let isLife = Math.ceil(Math.random() * 10) % 2;
+                    if (isLife == true && isShowLifeBox == false) {
+                        isShowLifeBox = true;
+                        var lifeBox = cc.instantiate(this.lifePrefab);
+                        lifeBox.setPosition(-263 + i * (95 + 10), 450);
+                        this.node.addChild(lifeBox);
+                    } else {
+                        var newBox = cc.instantiate(this.boxPrefab);
+                        var scoreLabel = newBox.children[0];
+                        let isDouble = Math.ceil(Math.random() * 10) % 2;
+                        if (isDouble == 1) {
+                            scoreLabel.getComponent(cc.Label).string = 2 * this.level;
+                        } else {
+                            scoreLabel.getComponent(cc.Label).string = this.level;
+                        }
+                        this.node.addChild(newBox);
+                        newBox.setPosition(-263 + i * (95 + 10), 450);
+                    }
+                }
+            }
+
+            this.bollDown = false;
+        }
     },
 
-    onCollisionExit: function (other, self) {
-        console.log('4666');
+    touchStart: function (event) {
+        this.ballLink.node.setPosition(cc.v2(this.firstBollPositionX, -350));
     },
 
-    start () {
+    touchMove: function(event) {
+        if (this.isActivity == false) {
+            this.ballLink.enabled = true;
+            this.allBollsLabel.enabled = true;
+
+            var touchX = event.touch._point.x;
+            this.ballLink.node.setRotation(touchX);
+            if (this.ballLink.node.rotation < 280) {
+                this.ballLink.node.setRotation(280);
+            }
+            if (this.ballLink.node.rotation > 440) {
+                this.ballLink.node.setRotation(440);
+            }
+        }
         
+    },
+
+    touchEnd: function (event) {
+        if (this.isActivity == false) {
+            this.ballLink.enabled = false;
+            this.allBollsLabel.enabled = false;
+            if (this.isBegin == false) {
+                this.isBegin = true;
+            }
+            this.schedule(function(){
+                var boll = cc.instantiate(this.bollPrefab);
+                this.node.addChild(boll);
+                boll.game = this;
+                boll.setPosition(cc.v2(this.firstBollPositionX, -350));
+                var boxRigidBody = boll.getComponent(cc.RigidBody);
+                var angle = -this.ballLink.node.rotation - 270;
+                var toX = Math.cos(angle * 0.017453293) * 100;
+                var toY = Math.sin(angle * 0.017453293) * 100;
+                boxRigidBody.linearVelocity = cc.v2(toX * 10, toY * 10);
+            }.bind(this), 0.08, this.allBolls - 1)
+            
+            this.schedule(function(){
+                this.indexBoll.enabled = false;
+                this.isFirstBoll = false;
+            }.bind(this), 0.08 * (this.allBolls - 1), 1);
+
+            this.isActivity = true;
+        }
+    },
+
+    gameOver: function () {
+
     },
 
     update (dt) {
         if (this.bollDown == true) {
-            var childrenNode = this.node.children;
-            for (var i = 0; i < childrenNode.length; i++) {
-                var node = childrenNode[i];
-                var box = node.getComponent(cc.Sprite);
-                console.log(node.name);
-                if (node.name == "boxSprite" && box.tag == 0) {
-                    node.y -= 100;
-                    box.tag = 1;
-                    // node.runAction(moveTo(node.x, node.y - 100));
-                }
-            }
-            this.bollDown == false;
+            this.initBox();
         }
-    },
-
-    // 只在两个碰撞体开始接触时被调用一次
-    onBeginContact: function (contact, selfCollider, otherCollider) {
-        console.log("aha?");
-    },
-
-    // 只在两个碰撞体结束接触时被调用一次
-    onEndContact: function (contact, selfCollider, otherCollider) {
-        console.log("2333?");
-    },
-
-    // 每次将要处理碰撞体接触逻辑时被调用
-    onPreSolve: function (contact, selfCollider, otherCollider) {
-    },
-
-    // 每次处理完碰撞体接触逻辑时被调用
-    onPostSolve: function (contact, selfCollider, otherCollider) {
+        
+        if(this.isFirstBoll == true) {
+            this.indexBoll.enabled = true;
+            this.indexBoll.node.setPosition(cc.v2(this.firstBollPositionX, -350));
+        }
     },
 });

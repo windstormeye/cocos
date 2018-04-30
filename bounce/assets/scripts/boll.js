@@ -2,7 +2,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-       
+
+       game: {
+            default: null,
+            type: cc.Sprite,
+        },
     },
 
     onBeginContact: function (contact, selfCollider, otherCollider) {
@@ -17,7 +21,10 @@ cc.Class({
             } else {    
                 label.string = (--labelValue).toString();
             }
-            
+        }
+        if (otherCollider.node.name == "lifeBox") {
+            otherCollider.node.destroy();
+            selfCollider.node.game.addBolls ++;
         }
     },
 

@@ -17,7 +17,7 @@
       false,
       false,
       true,
-      false
+      true
     ],
     [
       false,
@@ -27,7 +27,7 @@
     ],
     [
       false,
-      false,
+      true,
       true,
       false
     ]
@@ -49,6 +49,5 @@
     "width": 960
   },
   "use-customize-simulator": false,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }
