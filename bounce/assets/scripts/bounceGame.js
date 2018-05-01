@@ -17,7 +17,7 @@ cc.Class({
         // 所有触底小球计数
         tampBolls: 0,
         addBolls: 0,
-        level: 0,
+        level: 1,
 
         // 标记第一个触底boll的boll
         indexBoll: {
@@ -61,6 +61,16 @@ cc.Class({
             default: null,
             type: cc.Label,
         },
+
+        rockAudio: {
+            default: null,
+            url: cc.AudioClip,
+        },
+
+        circleAudio: {
+            default: null,
+            url: cc.AudioClip,
+        },
     },
 
     onLoad () {
@@ -68,15 +78,6 @@ cc.Class({
         cc.director.getPhysicsManager().enabled = true;
         // 开启碰撞
         cc.director.getCollisionManager().enabled = true;
-    
-        for (var i = 0; i < 6; i++) {
-            let isBox = Math.ceil(Math.random() * 10) % 2;
-            if (isBox == 1) {
-                var newBox = cc.instantiate(this.boxPrefab);
-                this.node.addChild(newBox);
-                newBox.setPosition(-263 + i * (95 + 10), 450);
-            }
-        }
 
         this.indexBoll.node.setPosition(cc.v2(this.firstBollPositionX, -350));
         this.ballLink.node.setPosition(cc.v2(this.firstBollPositionX, -350));   
@@ -84,6 +85,7 @@ cc.Class({
         this.ground.getComponent('groundSprite').game = this;
         this.initBox();
         this.allBolls = 1;
+        this.level = 1;
 
         this.node.on(cc.Node.EventType.TOUCH_START, function(event){
             this.touchStart(event);
@@ -97,10 +99,21 @@ cc.Class({
             this.touchEnd(event);
         }.bind(this), this);
 
+        // 生成第一层小球
+        for (var i = 0; i < 6; i++) {
+            let isBox = Math.ceil(Math.random() * 10) % 2;
+            if (isBox == 1) {
+                var newBox = cc.instantiate(this.boxPrefab);
+                this.node.addChild(newBox);
+                newBox.setPosition(-263 + i * (95 + 10), 450);
+                var colorArr = this.hslToRgb(this.level * 0.025, 0.5, 0.5);
+                newBox.setColor(cc.color(colorArr[0], colorArr[1], colorArr[2]));
+            }
+        }
+
     },
 
     initBox: function () {   
-        this.allBollsLabel.node.setPosition(cc.v2(this.firstBollPositionX - 30, -315));
         this.level ++;
         this.levelLabel.getComponent(cc.Label).string = "分数：" + this.level;
         // 下移box
@@ -112,7 +125,7 @@ cc.Class({
                     if (node.position.y <= 450) {
                         node.y -= 100;
                         if (node.y == -350) {
-                            this.gameOver();
+                            this.showGameOver();
                         }
                     }
                 }
@@ -139,6 +152,8 @@ cc.Class({
                         }
                         this.node.addChild(newBox);
                         newBox.setPosition(-263 + i * (95 + 10), 450);
+                        var colorArr = this.hslToRgb(this.level * 0.025, 0.5, 0.5);
+                        newBox.setColor(cc.color(colorArr[0], colorArr[1], colorArr[2]));
                     }
                 }
             }
@@ -154,7 +169,6 @@ cc.Class({
     touchMove: function(event) {
         if (this.isActivity == false) {
             this.ballLink.enabled = true;
-            this.allBollsLabel.enabled = true;
 
             var touchX = event.touch._point.x;
             this.ballLink.node.setRotation(touchX);
@@ -196,8 +210,8 @@ cc.Class({
         }
     },
 
-    gameOver: function () {
-
+    showGameOver: function () {
+        cc.director.loadScene('bounceGame');
     },
 
     update (dt) {
@@ -210,4 +224,30 @@ cc.Class({
             this.indexBoll.node.setPosition(cc.v2(this.firstBollPositionX, -350));
         }
     },
+
+    hslToRgb: function (h, s, l) {
+        var r, g, b;
+    
+        if(s == 0) {
+            r = g = b = l; // achromatic
+        } else {
+            var hue2rgb = function hue2rgb(p, q, t) {
+                if(t < 0) t += 1;
+                if(t > 1) t -= 1;
+                if(t < 1/6) return p + (q - p) * 6 * t;
+                if(t < 1/2) return q;
+                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            }
+    
+            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            var p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1/3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1/3);
+        }
+    
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    }
+
 });

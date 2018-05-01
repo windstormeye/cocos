@@ -2,16 +2,12 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-
-       game: {
-            default: null,
-            type: cc.Sprite,
-        },
+        
     },
 
     onBeginContact: function (contact, selfCollider, otherCollider) {
         if (otherCollider.node.name == "boxSprite") {
-            // 拿到label
+            cc.audioEngine.playEffect(selfCollider.node.game.rockAudio, false);
             var box = otherCollider.getComponent(cc.Sprite);
             var label = box.getComponentInChildren(cc.Label);
             var labelValue =  parseInt(label.string);
@@ -23,18 +19,9 @@ cc.Class({
             }
         }
         if (otherCollider.node.name == "lifeBox") {
+            cc.audioEngine.playEffect(selfCollider.node.game.circleAudio, false);
             otherCollider.node.destroy();
             selfCollider.node.game.addBolls ++;
         }
     },
-
-    onLoad () {
-        
-    },
-
-    start () {
-
-    },
-
-    // update (dt) {},
 });
